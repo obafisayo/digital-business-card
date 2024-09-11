@@ -1,3 +1,14 @@
+/* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+}
+@layer base {
+    html, body {
+        @apply dark:bg-black bg-white text-black dark:text-white
+            transition-all duration-300 scroll-smooth
+    }
+}

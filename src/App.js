@@ -1,10 +1,13 @@
 import './App.css';
+import ScrollToTop from './components/scrolltotop/ScrollToTop.jsx';
+import Router from './routes/Routes.jsx';
 
 function App() {
   return (
-    <div className="App h-[50vh] bg-red-800">
-      home
-    </div>
+    <>
+      <ScrollToTop />
+      <Router />
+    </>
   );
 }
 
