@@ -19,11 +19,15 @@ module.exports = {
           sm: "2rem"
         }
       },
-      // fontFamily: {
-      //   bebas: "Bebas Neue"
-      // },
+      textShadow: {
+        default: '2px 2px 2px rgba(0, 0, 0, 0.5)',
+        md: '3px 3px 3px rgba(0, 0, 0, 0.5)',
+        lg: '4px 4px 4px rgba(0, 0, 0, 0.5)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textshadow'),
+  ],
 };
 
