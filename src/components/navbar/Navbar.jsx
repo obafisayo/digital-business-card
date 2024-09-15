@@ -18,7 +18,7 @@ const Navbar = () => {
                   About
                 </Link>
               </li>
-              <li>
+              <li className='max-sm:hidden'>
                 <Link to={"#contact"}>
                   Contact Sales
                 </Link>
@@ -32,7 +32,7 @@ const Navbar = () => {
                   <Button type='primary'>Login</Button>
                 </Link>
               </li>
-              <li>
+              <li className='max-sm:hidden'>
                 <Link to={SIGNUP}>
                   <Button size='large'>Create free account</Button>
                 </Link>
