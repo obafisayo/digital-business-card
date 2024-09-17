@@ -54,6 +54,10 @@ export default function Router() {
             element: <AppLayout />,
             children: [
                 {
+                    path: APP,
+                    element: <Cards />
+                },
+                {
                     path: CARDS,
                     element: <Cards />
                 },
@@ -78,6 +82,10 @@ export default function Router() {
             path: AUTH,
             element: <AuthLayout />,
             children: [
+                {
+                    path: AUTH,
+                    element: <Signin />
+                },
                 {
                     path: SIGNIN,
                     element: <Signin />
