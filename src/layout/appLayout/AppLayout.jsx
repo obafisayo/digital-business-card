@@ -1,12 +1,17 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 const AppLayout = () => {
+  
+
   return (
     <div>
-        <main>
-            <Outlet />
-        </main>
+      <main>
+        <Sidebar
+          children={<Outlet />}
+        />
+      </main>
     </div>
   )
 }
