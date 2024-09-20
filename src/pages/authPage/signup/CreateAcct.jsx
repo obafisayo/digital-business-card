@@ -1,6 +1,7 @@
 import React from 'react';
 import {HiOutlineIdentification} from 'react-icons/hi';
-import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 import axios from 'axios';
 
@@ -12,6 +13,7 @@ const Signin = () => {
     });
   
     const url = 'https://codeguru.isaac0yen.com';
+    const navigate = useNavigate();
   
     const handleRegisterChange = (e) => {
       const { name, value } = e.target;
@@ -23,6 +25,7 @@ const Signin = () => {
       try {
         const response = await axios.post(`${url}/api/users/register`, register);
         alert('Register successful!');
+        navigate('/')
         console.log(response.data)
         
       } catch (error) {
@@ -40,7 +43,7 @@ const Signin = () => {
               <h2 className=' text-[#1677ff] text-[40px] tracking-widest'>Bizln</h2>
             </div>
             <h2 className='text-[24px] mt-4 font-normal text-center'>Create account to get started?</h2>
-            <p className='text-center mt-4 font-normal text-gray-600'>Already have an account? <Link>Log in</Link></p>
+            <p className='text-center mt-4 font-normal text-gray-600'>Already have an account? <Link to='/auth/signin'>Log in</Link></p>
             <form onSubmit={handleregisterSubmit} className='flex flex-col gap-5 pl-10 pt-4'>
             <label className='font-semibold' htmlFor='username'>Username</label>
             <input 
@@ -61,15 +64,6 @@ const Signin = () => {
               className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
               />
               <label className='font-semibold' htmlFor='email'>Password</label>
-              <input 
-              type="password" 
-              name="password" 
-              id="password"
-              onChange={handleRegisterChange}
-              value={register.password}
-              className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
-              />
-              <label className='font-semibold' htmlFor='email'>Verify Password</label>
               <input 
               type="password" 
               name="password" 
