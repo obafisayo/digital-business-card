@@ -37,7 +37,7 @@ const Signin = () => {
 
   return (
     <div className='min-h-screen flex justify-center md:bg-[#1677ff] sm:bg-white'>
-        <div className='w-[28rem] h-[46rem] bg-[#F7FAFC] mt-12 mb-12 rounded-[1rem]'>
+        <div className='w-[28rem] h-[40rem] bg-[#F7FAFC] mt-12 mb-12 rounded-[1rem]'>
             <div className='flex flex-row gap-3 items-center justify-center mt-6'>
               <HiOutlineIdentification size={60} color='#1677ff' />
               <h2 className=' text-[#1677ff] text-[40px] tracking-widest'>Bizln</h2>
