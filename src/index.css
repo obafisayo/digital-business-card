@@ -12,3 +12,20 @@
             transition-all duration-300 scroll-smooth
     }
 }
+
+.group {
+    position: relative;
+}
+
+.perspective {
+    perspective: 1000px;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
+.remove-scroll-bar::-webkit-scrollbar {
+    height: 0;
+    /* background: #000; */
+}
