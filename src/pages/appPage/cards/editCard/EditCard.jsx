@@ -13,11 +13,21 @@ const EditCard = ({selectedId, person, handleEdit, setIsEditing}) => {
         >
         <h2 className="text-xl font-bold">Edit Details</h2>
         <div className="mt-4">
-            <label className="block">Name:</label>
+            <label className="block">Firstname:</label>
             <input 
             type="text" 
-            name="name" 
-            value={person.name} 
+            name="firstname" 
+            value={person.firstname} 
+            onChange={handleEdit} 
+            className="border rounded p-1 w-full"
+            />
+        </div>
+        <div className="mt-4">
+            <label className="block">Lastname:</label>
+            <input 
+            type="text" 
+            name="lastname" 
+            value={person.lastname} 
             onChange={handleEdit} 
             className="border rounded p-1 w-full"
             />
