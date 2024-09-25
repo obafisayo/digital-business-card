@@ -7,12 +7,12 @@ import axios from 'axios';
 
 const Signin = () => {
     const [register, setRegister] = useState({
-      name: '',
+      username: '',
       email: '',
       password: ''
     });
   
-    const url = 'https://codeguru.isaac0yen.com';
+    const url = 'https://bizln.isaac0yen.com/';
     const navigate = useNavigate();
   
     const handleRegisterChange = (e) => {
@@ -23,7 +23,7 @@ const Signin = () => {
     const handleregisterSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post(`${url}/api/users/register`, register);
+        const response = await axios.post(`${url}/user`, register);
         alert('Register successful!');
         navigate('/')
         console.log(response.data)

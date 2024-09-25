@@ -5,11 +5,11 @@ import axios from 'axios';
 
 const Signin = () => {
   const [loginData, setLoginData] = useState({
-    email: '',
+    username: '',
     password: ''
   });
 
-  const url = 'https://codeguru.isaac0yen.com';
+  const url = 'https://bizln.isaac0yen.com';
   const navigate = useNavigate();
 
   const handleLoginChange = (e) => {
@@ -20,7 +20,7 @@ const Signin = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${url}/api/users/login`, loginData);
+      const response = await axios.post(`${url}/user/login`, loginData);
       console.log(response.data);
 
       // If login is successful, navigate to the home page
