@@ -11,7 +11,7 @@ const Signin = () => {
   });
 
   const expiresIn = 10000000
-  const url1 = 'http://localhost:8080'
+  // const url1 = 'http://localhost:8080'
   const url = 'https://bizln.isaac0yen.com';
   const navigate = useNavigate();
 
