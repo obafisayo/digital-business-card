@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { HiOutlineIdentification } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { APP, CONTACTS, SIGNUP } from '../../../routes/RoutesConstant';
 
 const Signin = () => {
   const [loginData, setLoginData] = useState({
-    email: '',
+    username: '',
     password: ''
   });
 
-  const url = 'https://codeguru.isaac0yen.com';
+  const expiresIn = 10000000
+  // const url1 = 'http://localhost:8080'
+  const url = 'https://bizln.isaac0yen.com';
   const navigate = useNavigate();
 
   const handleLoginChange = (e) => {
@@ -20,15 +23,29 @@ const Signin = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${url}/api/users/login`, loginData);
+      const response = await axios.post(`${url}/user/login`, loginData);
+      console.log(response.data);
+
       if (response.status === 200) {
         alert('Login successful!');
-        navigate('/'); // Navigate to the home page
+        const { accessToken} = response.data;
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('tokenExpiration', Date.now() + expiresIn * 1000);
+        navigate(APP);
       }
     } catch (error) {
       console.error('Login failed:', error);
-      if (error.response && error.response.status === 401) {
-        alert('Login failed: Unauthorized. Please check your email and password.');
+
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        if (error.response.status === 401) {
+          alert('Login failed: Unauthorized. Please check your username and password.');
+        } else {
+          alert(`Login failed: ${error.response.data.message || 'Unknown error'}`);
+        }
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+        alert('Login failed: No response from server.');
       } else {
         alert('Login failed: Unknown error.');
       }
@@ -40,20 +57,20 @@ const Signin = () => {
       <div className='w-[28rem] h-[42rem] bg-[#F7FAFC] mt-12 mb-12 rounded-[1rem]'>
         <div className='flex flex-row gap-3 items-center justify-center mt-6'>
           <HiOutlineIdentification size={60} color='#1677ff' />
-          <h2 className=' text-[#1677ff] text-[40px] tracking-widest'>Bizln</h2>
+          <h2 className='text-[#1677ff] text-[40px] tracking-widest'>Bizln</h2>
         </div>
-        <h2 className='text-[24px] mt-4 font-normal text-center'>Login in to your account</h2>
+        <h2 className='text-[24px] mt-4 font-normal text-center'>Login to your account</h2>
         <p className='text-center mt-4 font-normal text-gray-600'>
-          Don't have an account? <a href="/auth/signup">Sign up</a>
+          Don't have an account? <Link to={SIGNUP}>Sign up</Link>
         </p>
         <form onSubmit={handleLoginSubmit} className='flex flex-col gap-5 pl-10 pt-4'>
-          <label className='font-semibold' htmlFor='email'>Enter your email</label>
+          <label className='font-semibold' htmlFor='username'>Enter your username</label>
           <input 
-            type="email" 
-            name="email" 
-            id="email"
+            type="text" 
+            name="username" 
+            id="username"
             onChange={handleLoginChange}
-            value={loginData.email}
+            value={loginData.username}
             className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
           />
           <label className='font-semibold' htmlFor='password'>Password</label>
@@ -72,7 +89,7 @@ const Signin = () => {
 
         <div className='flex flex-col justify-center items-center'>
           <h3 className='font-normal text-gray-600 mt-4'>Having trouble logging in?</h3>
-          <a href="/contact">Contact us</a>
+          <Link to={CONTACTS}>Contact us</Link>
         </div>
         <p className='text-center text-[13px] mt-4 text-gray-600 px-4'>
           By continuing, you acknowledge that you have read, understood, and agree to our terms and conditions.
