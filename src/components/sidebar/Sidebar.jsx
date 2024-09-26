@@ -47,7 +47,7 @@ const Sidebar = ({ children }) => {
     return (
         <section className="flex overflow-hidden h-screen">
             {/* sidebar */}
-            <div className={`max-sm:absolute max-sm:bottom-0 sm:h-screen bg-gray-800 max-sm:w-screen text-white transition-all duration-300 ${isOpen ? 'w-64' : 'w-16'}`}>
+            <div className={`max-sm:absolute max-sm:bottom-0 sm:h-screen bg-gray-800 max-sm:w-full text-white transition-all duration-300 ${isOpen ? 'w-64' : 'w-16'}`}>
                 <div className="flex relative max-sm:hidden">
                     <Link to={CARDS} onClick={() => setSelectedTab("Cards")} className={`w-full flex items-center justify-start px-4 py-2 mt-4`}>
                         <div className='flex items-center justify-center gap-2'>
@@ -61,7 +61,7 @@ const Sidebar = ({ children }) => {
                 </div>
                 <div className="sm:mt-6 flex sm:flex-col gap-4 items-center sm:items-start justify-center">
                     {links.map((link) => (
-                        <Link to={link.to} onClick={() => setSelectedTab(link.title)} className={`w-full flex items-center justify-center sm:justify-start px-4 py-4 sm:py-2 hover:bg-gray-700`}>
+                        <Link key={link.id} to={link.to} onClick={() => setSelectedTab(link.title)} className={`w-full flex items-center justify-center sm:justify-start px-4 py-4 sm:py-2 hover:bg-gray-700`}>
                             <div className='flex items-center justify-center gap-4'>
                                 <span className='flex justify-center items-center'>{link.icon}</span>
                                 <span className={`transition-all duration-300 max-sm:hidden ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 w-0 delay-100'}`}>{link.title}</span>

@@ -10,7 +10,8 @@ module.exports = {
         primary: "#D3E97A",
         secondary: "#238636",
         brandOffwhite: "#C7C7C7",
-        brandGray: "#484848"
+        brandGray: "#484848",
+        brandGreen: "#2BBE9B"
       },
       container: {
         center: true,
