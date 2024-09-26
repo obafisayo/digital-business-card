@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import EditCard from './editCard/EditCard';
-import { initialPerson } from '../../../config/userConfig';
-import CardLinks from './smallCard/links/CardLinks';
+// import { initialPerson } from '../../../config/userConfig';
+// import CardLinks from './smallCard/links/CardLinks';
 import axios from 'axios';
 
 const Cards = () => {

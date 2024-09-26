@@ -1,8 +1,8 @@
-import { useRoutes, Navigate } from "react-router-dom"
-import LandingPageLayout from "../layout/landingPageLayout/LandingPageLayout.jsx"
-import Home from "../pages/landingPage/home/Home.jsx"
-import About from "../pages/landingPage/about/About.jsx"
-import NotFound from "../pages/landingPage/NotFound.jsx"
+import { useRoutes, Navigate } from "react-router-dom";
+import LandingPageLayout from "../layout/landingPageLayout/LandingPageLayout.jsx";
+import Home from "../pages/landingPage/home/Home.jsx";
+import About from "../pages/landingPage/about/About.jsx";
+import NotFound from "../pages/landingPage/NotFound.jsx";
 import {
     ABOUT,
     HOME,
@@ -17,17 +17,18 @@ import {
     CONTACTS,
     PEOPLE,
     ACCOUNT
-} from "./RoutesConstant.js"
-import AppLayout from "../layout/appLayout/AppLayout.jsx"
-import AuthLayout from "../layout/authLayout/AuthLayout.jsx"
-import Signin from "../pages/authPage/signin/Signin.jsx"
-import CreateAcct from "../pages/authPage/signup/CreateAcct.jsx"
-import ForgotPassword from "../pages/authPage/signup/ForgotPassword.jsx"
-import SignupOtp from "../pages/authPage/signup/SignupOtp.jsx"
-import Cards from "../pages/appPage/cards/Cards.jsx"
-import Contacts from "../pages/appPage/contacts/Contacts.jsx"
-import People from "../pages/appPage/people/People.jsx"
-import Account from "../pages/appPage/account/Account.jsx"
+} from "./RoutesConstant.js";
+import AppLayout from "../layout/appLayout/AppLayout.jsx";
+import AuthLayout from "../layout/authLayout/AuthLayout.jsx";
+import Signin from "../pages/authPage/signin/Signin.jsx";
+import CreateAcct from "../pages/authPage/signup/CreateAcct.jsx";
+import ForgotPassword from "../pages/authPage/signup/ForgotPassword.jsx";
+import SignupOtp from "../pages/authPage/signup/SignupOtp.jsx";
+import Cards from "../pages/appPage/cards/Cards.jsx";
+import Contacts from "../pages/appPage/contacts/Contacts.jsx";
+import People from "../pages/appPage/people/People.jsx";
+import Account from "../pages/appPage/account/Account.jsx";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function Router() {
     return useRoutes([
@@ -55,26 +56,37 @@ export default function Router() {
             children: [
                 {
                     path: APP,
-                    element: <Cards />
+                    element: (
+                        <ProtectedRoute element={<Cards />} />
+                    )
                 },
                 {
                     path: CARDS,
-                    element: <Cards />
+                    element: (
+                        <ProtectedRoute element={<Cards />} />
+                    )
                 },
                 {
                     path: CONTACTS,
-                    element: <Contacts />
+                    element: (
+                        <ProtectedRoute element={<Contacts />} />
+                    )
                 },
                 {
                     path: PEOPLE,
-                    element: <People />
+                    element: (
+                        <ProtectedRoute element={<People />} />
+                    )
                 },
                 {
                     path: ACCOUNT,
-                    element: <Account />
+                    element: (
+                        <ProtectedRoute element={<Account />} />
+                    )
                 },
                 {
-                    path: '*', element: <Navigate to={`/${NOTFOUND}`} replace />
+                    path: '*',
+                    element: <Navigate to={`/${NOTFOUND}`} replace />
                 }
             ]
         },
@@ -103,13 +115,18 @@ export default function Router() {
                     element: <SignupOtp />
                 },
                 {
-                    path: NOTFOUND, element: <NotFound />
+                    path: NOTFOUND,
+                    element: <NotFound />
                 },
                 {
-                    path: '*', element: <Navigate to={`/${NOTFOUND}`} replace />
+                    path: '*',
+                    element: <Navigate to={`/${NOTFOUND}`} replace />
                 }
             ]
         },
-        { path: '*', element: <NotFound /> }
-    ])
+        {
+            path: '*',
+            element: <NotFound />
+        }
+    ]);
 }
