@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 import axios from 'axios';
 
-const Signin = () => {
+const Signup = () => {
     const [register, setRegister] = useState({
       name: '',
       email: '',
@@ -25,15 +25,13 @@ const Signin = () => {
       try {
         const response = await axios.post(`${url}/api/users/register`, register);
         alert('Register successful!');
-        navigate('/')
+        localStorage.setItem('user', JSON.stringify(response.data));
         console.log(response.data)
-        
+        navigate('/');
       } catch (error) {
-        console.error('Login failed:', error);
-    
+        console.error('Register failed:', error);
+      }
     };
-  }
-
 
   return (
     <div className='min-h-screen flex justify-center md:bg-[#1677ff] sm:bg-white'>
@@ -72,11 +70,11 @@ const Signin = () => {
               value={register.password}
               className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
               />
-              <Link to="/signin"><button className='bg-[#1677ff] w-[23rem] p-2 font-semibold text-white rounded-md' type='submit'>Submit</button></Link>
+              <Link to="/app/account"><button className='bg-[#1677ff] w-[23rem] p-2 font-semibold text-white rounded-md' type='submit'>Submit</button></Link>
             </form>
         </div>
         </div>
   )
 }
 
-export default Signin;
+export default Signup;

@@ -21,32 +21,17 @@ const Signin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${url}/api/users/login`, loginData);
-      console.log(response.data);
-
-      // If login is successful, navigate to the home page
       if (response.status === 200) {
         alert('Login successful!');
         navigate('/'); // Navigate to the home page
       }
     } catch (error) {
       console.error('Login failed:', error);
-
-      if (error.response) {
-        console.error('Error response:', error.response.data);
-        if (error.response.status === 401) {
-          alert('Login failed: Unauthorized. Please check your email and password.');
-        } else {
-          alert(`Login failed: ${error.response.data.message || 'Unknown error'}`);
-        }
-      } else if (error.request) {
-        console.error('Error request:', error.request);
-        alert('Login failed: No response from server.');
+      if (error.response && error.response.status === 401) {
+        alert('Login failed: Unauthorized. Please check your email and password.');
       } else {
-        console.error('Error message:', error.message);
-        alert('Login failed: ' + error.message);
+        alert('Login failed: Unknown error.');
       }
-
-      console.log('Login data at the time of error:', loginData);
     }
   };
 
@@ -59,7 +44,7 @@ const Signin = () => {
         </div>
         <h2 className='text-[24px] mt-4 font-normal text-center'>Login in to your account</h2>
         <p className='text-center mt-4 font-normal text-gray-600'>
-          Don't have an account? <a href="/signup">Sign up</a>
+          Don't have an account? <a href="/auth/signup">Sign up</a>
         </p>
         <form onSubmit={handleLoginSubmit} className='flex flex-col gap-5 pl-10 pt-4'>
           <label className='font-semibold' htmlFor='email'>Enter your email</label>
