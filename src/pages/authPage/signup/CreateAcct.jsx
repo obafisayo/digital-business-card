@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Signin = () => {
     const [register, setRegister] = useState({
-      name: '',
+      username: '',
       email: '',
       password: ''
     });
@@ -51,7 +51,7 @@ const Signin = () => {
               name="name" 
               id="name"
               onChange={handleRegisterChange}
-              value={register.name}
+              value={register.username}
               className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
               />
               <label className='font-semibold' htmlFor='email'>Email</label>

@@ -5,7 +5,7 @@ import ContactSupport from './contactSupport/ContactSupport';
 const Home = () => {
   return (
     <div>
-      <HeroSection />
+      <HeroSection /> 
       <ContactSupport />
     </div>
   )
