@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HiOutlineIdentification } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { SIGNIN } from '../../../routes/RoutesConstant';
+import { SIGNIN, URL } from '../../../routes/RoutesConstant';
 
 const Signup = () => {
   const [register, setRegister] = useState({
@@ -11,8 +11,7 @@ const Signup = () => {
     password: ''
   });
 
-  // const url1 = 'http://localhost:8080';
-  const url = 'https://bizln.isaac0yen.com';
+  const url = URL;
   const navigate = useNavigate();
 
   const handleRegisterChange = (e) => {

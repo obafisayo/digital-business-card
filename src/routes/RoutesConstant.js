@@ -16,4 +16,7 @@ export const CONTACTS = `${APP}/contacts`;
 export const PEOPLE = `${APP}/people`;
 export const ACCOUNT = `${APP}/account`;
 
+export const URL = 'http://localhost:8080';
+// export const URL = 'https://bizln.isaac0yen.com';
+
 export const NOTFOUND = "404"

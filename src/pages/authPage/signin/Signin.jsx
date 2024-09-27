@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HiOutlineIdentification } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { APP, CONTACTS, SIGNUP } from '../../../routes/RoutesConstant';
+import { APP, CONTACTS, SIGNUP, URL } from '../../../routes/RoutesConstant';
 
 const Signin = () => {
   const [loginData, setLoginData] = useState({
@@ -11,8 +11,7 @@ const Signin = () => {
   });
 
   const expiresIn = 10000000
-  // const url1 = 'http://localhost:8080'
-  const url = 'https://bizln.isaac0yen.com';
+  const url = URL;
   const navigate = useNavigate();
 
   const handleLoginChange = (e) => {
@@ -24,7 +23,6 @@ const Signin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${url}/user/login`, loginData);
-      console.log(response.data);
 
       if (response.status === 200) {
         alert('Login successful!');

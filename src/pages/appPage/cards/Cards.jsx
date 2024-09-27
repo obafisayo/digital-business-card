@@ -4,6 +4,7 @@ import EditCard from './editCard/EditCard';
 // import { initialPerson } from '../../../config/userConfig';
 // import CardLinks from './smallCard/links/CardLinks';
 import axios from 'axios';
+import { URL } from '../../../routes/RoutesConstant';
 
 const Cards = () => {
     const [person, setPerson] = useState({
@@ -24,7 +25,7 @@ const Cards = () => {
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const url = 'https://bizln.isaac0yen.com';
+    const url = URL;
 
     useEffect(() => {
         const fetchCards = async () => {
@@ -44,7 +45,7 @@ const Cards = () => {
         };
 
         fetchCards();
-    }, [person]);
+    }, [person, url]);
 
     const handleEdit = (e) => {
         setPerson({ ...person, [e.target.name]: e.target.value });
