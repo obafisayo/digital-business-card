@@ -29,6 +29,7 @@ import Contacts from "../pages/appPage/contacts/Contacts.jsx";
 import People from "../pages/appPage/people/People.jsx";
 import Account from "../pages/appPage/account/Account.jsx";
 import ProtectedRoute from "./ProtectedRoute";
+import { UserProvider } from "../contexts/UserContext.js";
 
 export default function Router() {
     return useRoutes([
@@ -52,7 +53,7 @@ export default function Router() {
         },
         {
             path: APP,
-            element: <AppLayout />,
+            element: <UserProvider><AppLayout /></UserProvider>,
             children: [
                 {
                     path: APP,

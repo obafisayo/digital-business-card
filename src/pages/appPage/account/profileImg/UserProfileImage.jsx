@@ -4,7 +4,7 @@ import LoadingDiv from '../../../../components/loadingDiv/LoadingDiv';
 
 const UserProfileImage = ({ image, username, email, setImage, setIsChanged }) => {
   const [hovered, setHovered] = useState(false);
-  const [loading, setLoading] = useState(false); // State to manage loading status
+  const [loading, setLoading] = useState(false);
 
   const handleImageUpload = () => {
     if (!window.cloudinary) {
@@ -12,8 +12,8 @@ const UserProfileImage = ({ image, username, email, setImage, setIsChanged }) =>
       return;
     }
 
-    const cloudName = 'cloudinary-training';
-    const uploadPreset = 'vpy7udvq';
+    const cloudName = 'dafdhu3h5';
+    const uploadPreset = 'bizin_preset';
 
     setLoading(true); // Set loading to true when upload starts
 
@@ -22,6 +22,8 @@ const UserProfileImage = ({ image, username, email, setImage, setIsChanged }) =>
         cloudName,
         uploadPreset,
         sources: ['local', 'url'],
+        tags: ['bizin_asset'],
+        clientAllowedFormats: ['image'],
         resourceType: 'image',
       },
       (error, result) => {

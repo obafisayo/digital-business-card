@@ -9,8 +9,7 @@ const Signin = () => {
     username: '',
     password: ''
   });
-
-  const expiresIn = 10000000
+  const [errorMessage, setErrorMessage] = useState('');
   const url = URL;
   const navigate = useNavigate();
 
@@ -21,31 +20,35 @@ const Signin = () => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(''); // Reset error message before login attempt
+
     try {
       const response = await axios.post(`${url}/user/login`, loginData);
 
       if (response.status === 200) {
-        alert('Login successful!');
-        const { accessToken} = response.data;
-        localStorage.setItem('token', accessToken);
-        localStorage.setItem('tokenExpiration', Date.now() + expiresIn * 1000);
-        navigate(APP);
+        const { accessToken } = response.data;
+
+        if (accessToken) { // Ensure accessToken is defined
+          localStorage.setItem('token', accessToken);
+          localStorage.setItem('tokenExpiration', Date.now() + 10000000 * 1000);
+          navigate(APP);
+        } else {
+          throw new Error('Token not received');
+        }
       }
     } catch (error) {
       console.error('Login failed:', error);
 
       if (error.response) {
-        console.error('Error response:', error.response.data);
         if (error.response.status === 401) {
-          alert('Login failed: Unauthorized. Please check your username and password.');
+          setErrorMessage('Login failed: Unauthorized. Please check your username and password.');
         } else {
-          alert(`Login failed: ${error.response.data.message || 'Unknown error'}`);
+          setErrorMessage(`Login failed: ${error.response.data.message || ' Please check your username and password.'}`);
         }
       } else if (error.request) {
-        console.error('Error request:', error.request);
-        alert('Login failed: No response from server.');
+        setErrorMessage('Login failed: No response from server.');
       } else {
-        alert('Login failed: Unknown error.');
+        setErrorMessage('Login failed: Unknown error.');
       }
     }
   };
@@ -83,6 +86,7 @@ const Signin = () => {
           <button className='bg-[#1677ff] w-[23rem] p-2 font-semibold text-white rounded-md' type='submit'>
             Login
           </button>
+          {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
         </form>
 
         <div className='flex flex-col justify-center items-center'>
