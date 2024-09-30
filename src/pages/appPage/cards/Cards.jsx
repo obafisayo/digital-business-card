@@ -3,11 +3,22 @@ import { AnimatePresence } from 'framer-motion';
 import EditCard from './editCard/EditCard';
 import axios from 'axios';
 import { URL } from '../../../routes/RoutesConstant';
+import MultiStepForm from '../../../components/MultiStepForm/MultiStepForm';
 import LoadingDiv from '../../../components/loadingDiv/LoadingDiv';
 import SmallCard from './smallCard/SmallCard';
 import { initialPerson } from '../../../config/userConfig';
 
 const Cards = () => {
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+    const openPopup = () => {
+      setIsPopupVisible(true); // Show the popup
+    };
+  
+    const closePopup = () => {
+      setIsPopupVisible(false); // Hide the popup
+    };
+  
     // const [person, setPerson] = useState({
     //     templateId: "2",
     //     name: "John Doe",
@@ -71,12 +82,21 @@ const Cards = () => {
                     )}
                 </div>
 
-                <button
+                <div>
+                    <button
                     className='fixed right-10 top-24 rounded-lg border px-4 py-2 bg-gray-500 text-white cursor-pointer hover:bg-black transition-colors duration-300'
                     onClick={() => setIsEditing(true)}
                 >
                     Edit
                 </button>
+                <button
+                    className='fixed right-[16rem] top-4 rounded-lg border px-4 py-2 bg-gray-500 text-white cursor-pointer hover:bg-black transition-colors duration-300'
+                    onClick={openPopup}>Complete Information
+                </button>
+                </div>
+                {/* Multiform */}
+                <MultiStepForm isVisible={isPopupVisible} closePopup={closePopup} />
+
                 <AnimatePresence>
                     {isEditing && (
                         <EditCard
