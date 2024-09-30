@@ -5,15 +5,26 @@ import Card1Back from "../assets/cards/card1/Back.png";
 import Logo from "../assets/static/Logo.png";
 
 export const initialPerson = {
+    templateId: "1",
     firstname: 'Obafisayo',
     lastname: 'Abimbola',
     name: 'Obafisayo Abimbola',
     title: 'Software Engineer',
+    company_name: "Apex Cards",
+    company_tagline: "Future of custom cards",
+    telephone: "+1 (555) 123-4567",
+    email: "email@yourdomain.com",
+    facebook_url: "https://www.facebook.com/johndoe",
+    linkedin_url: "https://www.linkedin.com/in/johndoe",
+    twitter_url: "https://twitter.com/johndoe",
+    website_url: "https://www.johndoe.com",
+    address: "123 Tech Street, San Francisco, CA 94105",
     link: 'https://obafisayo-portfolio.netlify.app/',
     location: 'LG, Nigeria',
     cardFront: Card1Front,
     cardBack: Card1Back,
     qrcodeClass: "absolute bottom-5 right-10",
+    logo: "https://res.cloudinary.com/dafdhu3h5/image/upload/v1727474173/clurakhvmq2gyyafnndu.png",
     images: [
         "idyfyg0uog5yhi8xamyr",
         "m83bazamitfm9hvrkbem",

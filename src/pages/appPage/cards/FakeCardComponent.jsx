@@ -4,26 +4,23 @@ import EditCard from './editCard/EditCard';
 import axios from 'axios';
 import { URL } from '../../../routes/RoutesConstant';
 import LoadingDiv from '../../../components/loadingDiv/LoadingDiv';
-import SmallCard from './smallCard/SmallCard';
-import { initialPerson } from '../../../config/userConfig';
 
-const Cards = () => {
-    // const [person, setPerson] = useState({
-    //     templateId: "2",
-    //     name: "John Doe",
-    //     title: "Software Engineer",
-    //     company_name: "Tech Solutions Inc.",
-    //     company_tagline: "Innovative Solutions for Tomorrow",
-    //     telephone: "+1 (555) 123-4567",
-    //     email: "john.doe@techsolutions.com",
-    //     location: "San Francisco, CA",
-    //     facebook_url: "https://www.facebook.com/johndoe",
-    //     linkedin_url: "https://www.linkedin.com/in/johndoe",
-    //     twitter_url: "https://twitter.com/johndoe",
-    //     website_url: "https://www.johndoe.com",
-    //     address: "123 Tech Street, San Francisco, CA 94105"
-    // });
-    const [person, setPerson] = useState(initialPerson)
+const FakeCardComponent = () => {
+    const [person, setPerson] = useState({
+        templateId: "2",
+        name: "John Doe",
+        title: "Software Engineer",
+        company_name: "Tech Solutions Inc.",
+        company_tagline: "Innovative Solutions for Tomorrow",
+        telephone: "+1 (555) 123-4567",
+        email: "john.doe@techsolutions.com",
+        location: "San Francisco, CA",
+        facebook_url: "https://www.facebook.com/johndoe",
+        linkedin_url: "https://www.linkedin.com/in/johndoe",
+        twitter_url: "https://twitter.com/johndoe",
+        website_url: "https://www.johndoe.com",
+        address: "123 Tech Street, San Francisco, CA 94105"
+    });
     const [isEditing, setIsEditing] = useState(false);
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -65,14 +62,15 @@ const Cards = () => {
                         <LoadingDiv />
                     ) : (
                         <>
-                        <SmallCard person={person} html={cards[0]} />
-                        {/* <div dangerouslySetInnerHTML={{ __html: cards[0] }} /> */}
+                            {cards.map((card, index) => (
+                                <div key={index} dangerouslySetInnerHTML={{ __html: card }} />
+                            ))}
                         </>
                     )}
                 </div>
 
                 <button
-                    className='fixed right-10 top-24 rounded-lg border px-4 py-2 bg-gray-500 text-white cursor-pointer hover:bg-black transition-colors duration-300'
+                    className='fixed right-4 top-4 rounded-lg border px-4 py-2 bg-gray-500 text-white cursor-pointer hover:bg-black transition-colors duration-300'
                     onClick={() => setIsEditing(true)}
                 >
                     Edit
@@ -91,4 +89,4 @@ const Cards = () => {
     );
 };
 
-export default Cards;
+export default FakeCardComponent;
