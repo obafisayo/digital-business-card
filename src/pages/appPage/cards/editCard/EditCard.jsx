@@ -1,98 +1,52 @@
-import React from 'react'
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import CardNav from '../../../../components/cardNav/CardNav';
+import Information from './information/Information';
+import Display from './display/Display';
+import Fields from './fields/Fields';
 
-const EditCard = ({selectedId, person, handleEdit, setIsEditing}) => {
-  return (
-    <motion.div 
-        layoutId={selectedId} 
-        className="absolute m-6 md:m-auto top-12 sm:top-8 max-sm:bottom-0 md:left-0 md:right-0 transform -translate-x-1/2 -translate-y-1/2 p-8
-            sm:rounded-2xl bg-slate-200 shadow-lg w-[90%] h-fit max-sm:h-fit max-sm:w-full"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        >
-        <h2 className="text-xl font-bold">Edit Details</h2>
-        <div className="mt-4">
-            <label className="block">Firstname:</label>
-            <input 
-            type="text" 
-            name="firstname" 
-            value={person.firstname} 
-            onChange={handleEdit} 
-            className="border rounded p-1 w-full"
-            />
-        </div>
-        <div className="mt-4">
-            <label className="block">Lastname:</label>
-            <input 
-            type="text" 
-            name="lastname" 
-            value={person.lastname} 
-            onChange={handleEdit} 
-            className="border rounded p-1 w-full"
-            />
-        </div>
-        <div className="mt-4">
-            <label className="block">Title:</label>
-            <input 
-            type="text" 
-            name="title" 
-            value={person.title} 
-            onChange={handleEdit} 
-            className="border rounded p-1 w-full"
-            />
-        </div>
-        <div className="mt-4">
-            <label className="block">Location:</label>
-            <input 
-            type="text" 
-            name="location" 
-            value={person.location} 
-            onChange={handleEdit} 
-            className="border rounded p-1 w-full"
-            />
-        </div>
-        {/* Preview Area */}
-        <div className="mt-6 p-4 bg-white rounded border shadow">
-            <h3 className="text-lg font-semibold">Preview</h3>
-            <p><strong>Name:</strong> {person.name}</p>
-            <p><strong>Title:</strong> {person.title}</p>
-            <p><strong>Location:</strong> {person.location}</p>
-        </div>
-        <div className="mt-6 p-4 bg-white rounded border shadow">
-            <h3 className="text-lg font-semibold">Preview</h3>
-            <p><strong>Name:</strong> {person.name}</p>
-            <p><strong>Title:</strong> {person.title}</p>
-            <p><strong>Location:</strong> {person.location}</p>
-        </div>
-        <div className="mt-6 p-4 bg-white rounded border shadow">
-            <h3 className="text-lg font-semibold">Preview</h3>
-            <p><strong>Name:</strong> {person.name}</p>
-            <p><strong>Title:</strong> {person.title}</p>
-            <p><strong>Location:</strong> {person.location}</p>
-        </div>
-        <div className="mt-6 p-4 bg-white rounded border shadow">
-            <h3 className="text-lg font-semibold">Preview</h3>
-            <p><strong>Name:</strong> {person.name}</p>
-            <p><strong>Title:</strong> {person.title}</p>
-            <p><strong>Location:</strong> {person.location}</p>
-        </div>
-        <div className="mt-4 flex justify-end">
-            <button 
-            className="bg-blue-500 text-white rounded p-2 mr-2"
-            onClick={() => setIsEditing(false)}
+const EditCard = ({ person, setPerson, setIsEditing }) => {
+    const [activeTab, setActiveTab] = useState(0);
+
+    const handleTabClick = (index) => {
+        setActiveTab(index);
+    };
+
+    return (
+        <div className='flex flex-col w-full bg-brandSky rounded  rounded-t-[46px] z-10'>
+            <div className="sticky flex justify-around items-center max-sm:flex-col max-sm:gap-2 w-full top-0 p-4 bg-brandSky z-20 md:rounded rounded-t-[46px]">
+                <div className='max-md:order-2'>
+                    <CardNav 
+                        arr={["Display", "Information", "Fields"]} 
+                        handler={handleTabClick}
+                    />
+                </div>
+                <div className="flex justify-end max-sm:order-1 max-sm:w-full max-sm:mr-10">
+                    <button 
+                        className="bg-blue-500 text-white rounded p-2 mr-2"
+                        onClick={() => setIsEditing(false)}
+                    >
+                        Save
+                    </button>
+                    <button 
+                        className="bg-red-500 text-white rounded p-2"
+                        onClick={() => setIsEditing(false)}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <div 
+                className="flex flex-col gap-2 relative max-sm:pb-14 p-8 pt-0"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
             >
-            Save
-            </button>
-            <button 
-            className="bg-red-500 text-white rounded p-2"
-            onClick={() => setIsEditing(false)}
-            >
-            Cancel
-            </button>
+                {activeTab === 0 && <Display person={person} />}
+                {activeTab === 1 && <Information person={person} setPerson={setPerson} />}
+                {activeTab === 2 && <Fields />}
+            </div>
         </div>
-    </motion.div>
-  )
+    );
 }
 
 export default EditCard;

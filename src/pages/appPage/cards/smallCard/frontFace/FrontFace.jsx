@@ -44,7 +44,7 @@ const FrontFace = ({ person }) => {
                             return item.value ? (
                                 <li className="flex gap-2" key={index}>
                                     {item.icon}
-                                    <p className="text-sm text-black break-normal w-[90%]">{item.value}</p>
+                                    <p className="text-sm text-black break-normal truncate w-[90%]">{item.value}</p>
                                 </li>
                             ) : null; // Return null if item.value does not exist
                         })}

@@ -7,11 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#D3E97A",
-        secondary: "#238636",
-        brandOffwhite: "#C7C7C7",
+        primary: "#5790DF",
+        secondary: "#093D89",
+        brandOffwhite: "#E9E9EB",
         brandGray: "#484848",
-        brandGreen: "#2BBE9B"
+        brandGreen: "#2BBE9B",
+        brandSky: "#E6EEFA",
+        textPrimary: "#6C7A9C",
       },
       container: {
         center: true,

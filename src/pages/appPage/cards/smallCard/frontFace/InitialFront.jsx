@@ -1,22 +1,18 @@
 import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-// import { generateHtmlString } from '../../../../../config/userConfig';
 import QRcodeComponent from '../../../../../components/qrcode/QRcodeComponent';
 
-const InitialFront = ({ person, html }) => {
+const InitialFront = ({ person, html, removeFlip }) => {
     const frontRef = useRef(null);
 
     useEffect(() => {
         if (frontRef.current) {
-            // Generate HTML string for the front face based on the person prop
-            // frontRef.current.innerHTML = generateHtmlString(person);
             frontRef.current.innerHTML = html;
         }
     }, [html]);
 
     return (
-        <motion.div 
-            className="absolute inset-0 h-full w-full rounded-xl [backface-visibility:hidden]"
+        <div 
+            className={`${removeFlip? "" : "absolute [backface-visibility:hidden]"} inset-0 h-full w-full rounded-xl`}
             style={{
                 backgroundImage: `url(${person.cardFront})`,
                 backgroundSize: 'cover',
@@ -27,7 +23,7 @@ const InitialFront = ({ person, html }) => {
             <div className={person.qrcodeClass}>
                 <QRcodeComponent link={person.link} size={50} />
             </div>
-        </motion.div>
+        </div>
     );
 }
 

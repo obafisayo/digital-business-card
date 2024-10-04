@@ -3,6 +3,7 @@ import { HiOutlineIdentification } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { APP, CONTACTS, SIGNUP, URL } from '../../../routes/RoutesConstant';
+import { HiEye, HiEyeOff } from 'react-icons/hi'; // Import eye icons
 
 const Signin = () => {
   const [loginData, setLoginData] = useState({
@@ -10,6 +11,7 @@ const Signin = () => {
     password: ''
   });
   const [errorMessage, setErrorMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
   const url = URL;
   const navigate = useNavigate();
 
@@ -75,14 +77,22 @@ const Signin = () => {
             className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
           />
           <label className='font-semibold' htmlFor='password'>Password</label>
-          <input 
-            type="password" 
-            name="password" 
-            id="password"
-            onChange={handleLoginChange}
-            value={loginData.password}
-            className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff]'
-          />
+          <div className='relative'>
+            <input 
+              type={showPassword ? "text" : "password"} // Toggle input type
+              name="password" 
+              id="password"
+              onChange={handleLoginChange}
+              value={loginData.password}
+              className='w-[23rem] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#1677ff] pr-10'
+            />
+            <span 
+              className='absolute right-12 top-1/2 transform -translate-y-1/2 cursor-pointer' 
+              onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            >
+              {showPassword ? <HiEyeOff size={24} /> : <HiEye size={24} />} {/* Eye icon */}
+            </span>
+          </div>
           <button className='bg-[#1677ff] w-[23rem] p-2 font-semibold text-white rounded-md' type='submit'>
             Login
           </button>

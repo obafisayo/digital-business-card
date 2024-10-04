@@ -14,12 +14,10 @@ const Account = () => {
     setEmail,
     username,
     email,
-    image,
     loading,
     error,
     success,
     isChanged,
-    setImage,
     setIsChanged,
     handleUpdate,
     confirmAction,
@@ -64,43 +62,39 @@ const Account = () => {
   };
 
   return (
-    <div className='ml-[3rem] mt-[2rem] mr-[3rem]'>
-      <UserProfileImage 
-        image={image} 
-        username={username} 
-        email={email} 
-        setImage={setImage} 
-        setIsChanged={setIsChanged}
-      />
-      <UserInfo 
-        username={username} 
-        email={email} 
-        handleChange={handleChange} 
-      />
-      {success && <p className="text-green-500 mt-4">Account updated successfully!</p>}
-      {error && <p className="text-red-500 mt-4">{error}</p>}
-      {loading && <LoadingDiv />}
-      {isChanged && (
-        <ActionButtons 
-          handleUpdate={handleUpdate} 
-          handleCancel={handleCancel} 
+    <section className="container w-full h-full pt-10">
+      <div className='container w-full h-full bg-brandSky rounded-t-[36px]'>
+        <UserProfileImage />
+        <UserInfo 
+          username={username} 
+          email={email} 
+          handleChange={handleChange} 
         />
-      )}
-      <div className="flex space-x-0 justify-between">
-        <button onClick={handleLogout} className='mt-4 bg-red-500 text-white py-2 px-4 rounded'>
-          Logout
-        </button>
-        <button onClick={handleDeleteAccount} className='mt-4 bg-red-500 text-white py-2 px-4 rounded'>
-          Delete Account
-        </button>
+        {success && <p className="text-green-500 mt-4">Account updated successfully!</p>}
+        {error && <p className="text-red-500 mt-4">{error}</p>}
+        {loading && <LoadingDiv />}
+        {isChanged && (
+          <ActionButtons 
+            handleUpdate={handleUpdate} 
+            handleCancel={handleCancel} 
+          />
+        )}
+        <div className="flex space-x-0 justify-between">
+          <button onClick={handleLogout} className='mt-4 bg-primary text-white py-2 px-4 rounded'>
+            Logout
+          </button>
+          <button onClick={handleDeleteAccount} className='mt-4 bg-red-500 text-white py-2 px-4 rounded'>
+            Delete Account
+          </button>
+        </div>
+        <ConfirmationModal 
+          showModal={showModal} 
+          actionType={actionType} 
+          confirmAction={() => confirmAction(actionType)} 
+          setShowModal={setShowModal} 
+        />
       </div>
-      <ConfirmationModal 
-        showModal={showModal} 
-        actionType={actionType} 
-        confirmAction={() => confirmAction(actionType)} 
-        setShowModal={setShowModal} 
-      />
-    </div>
+    </section>
   );
 };
 

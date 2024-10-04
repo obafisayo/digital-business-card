@@ -8,7 +8,7 @@ import { PiShareFat } from "react-icons/pi";
 import Share from '../share/Share';
 import Mediadisplay from '../mediadisplay/Mediadisplay';
 
-const BackFace = ({ person }) => {
+const BackFace = ({ person, removeFlip }) => {
     const [shareClicked, setShareClicked] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
@@ -19,7 +19,7 @@ const BackFace = ({ person }) => {
 
     return (
         <motion.div 
-            className="absolute inset-0 h-full w-full rounded-xl bg-black/80 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]"
+            className={`${removeFlip? "relative" : "absolute [transform:rotateY(180deg)] [backface-visibility:hidden]"} inset-0 h-full w-full rounded-xl bg-black/80 text-center text-slate-200`}
             style={{
                 backgroundImage: `url(${person.cardBack})`,
                 backgroundSize: 'cover',

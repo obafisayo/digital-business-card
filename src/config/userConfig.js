@@ -13,7 +13,7 @@ export const initialPerson = {
     company_name: "Apex Cards",
     company_tagline: "Future of custom cards",
     telephone: "+1 (555) 123-4567",
-    email: "email@yourdomain.com",
+    email: "abimbolaobafisayo@gmail.com",
     facebook_url: "https://www.facebook.com/johndoe",
     linkedin_url: "https://www.linkedin.com/in/johndoe",
     twitter_url: "https://twitter.com/johndoe",
@@ -53,7 +53,7 @@ export const initialPerson = {
     ],
     contact: {
         telephone: "000-123-456-7890",
-        email: "email@yourdomain.com",
+        email: "abimbolaobafisayo@gmail.com",
         address: "Your address goes here 125 Street, USA",
     },
     skills: ['JavaScript', 'React', 'Node.js', 'CSS', 'HTML'],
