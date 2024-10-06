@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion';
 import RoundedButton from '../../../../../components/secondaryButtons/RoundedButton';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import QRcodeComponent from '../../../../../components/qrcode/QRcodeComponent';
@@ -17,13 +16,8 @@ const Share = ({ link, handler = () => {} }) => {
     };
   return (
     <div className="absolute top-0 bottom-0 left-0 right-0 m-auto">
-        <motion.div 
-            className="relative w-full h-full flex items-center justify-center z-40"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-        >
+        <div 
+            className="relative w-full h-full flex items-center justify-center z-40">
             <RoundedButton classname={"left-4"} 
                 handler={handler}
                 icon={<IoIosCloseCircleOutline size={28} />} top={"top-8"}
@@ -37,7 +31,7 @@ const Share = ({ link, handler = () => {} }) => {
                 </button>
                 <QRcodeComponent link={link} size={130} text />
             </div>
-        </motion.div> 
+        </div> 
     </div>
   )
 }

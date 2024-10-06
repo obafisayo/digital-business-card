@@ -12,7 +12,7 @@ const EditCard = ({ person, setPerson, setIsEditing }) => {
     };
 
     return (
-        <div className='flex flex-col w-full bg-brandSky rounded  rounded-t-[46px] z-10'>
+        <div className='flex flex-col w-full bg-brandSky rounded rounded-t-[46px] z-10'>
             <div className="sticky flex justify-around items-center max-sm:flex-col max-sm:gap-2 w-full top-0 p-4 bg-brandSky z-20 md:rounded rounded-t-[46px]">
                 <div className='max-md:order-2'>
                     <CardNav 
@@ -35,15 +35,10 @@ const EditCard = ({ person, setPerson, setIsEditing }) => {
                     </button>
                 </div>
             </div>
-            <div 
-                className="flex flex-col gap-2 relative max-sm:pb-14 p-8 pt-0"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-            >
-                {activeTab === 0 && <Display person={person} />}
+            <div className="flex flex-col gap-2 relative max-sm:pb-14 p-8 pt-0">
+                {activeTab === 0 && <Display person={person} setPerson={setPerson} />}
                 {activeTab === 1 && <Information person={person} setPerson={setPerson} />}
-                {activeTab === 2 && <Fields />}
+                {activeTab === 2 && <Fields person={person} setPerson={setPerson} />}
             </div>
         </div>
     );

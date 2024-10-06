@@ -13,7 +13,7 @@ const UserProfileImage = ({ big }) => {
     handleImageUpload(async (secure_url) => {
       if (secure_url) {
         setImage(secure_url);
-        setIsChanged(true); // Set isChanged to true when the image is uploaded
+        setIsChanged(true);
       }
     });
   };

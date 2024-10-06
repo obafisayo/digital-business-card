@@ -7,16 +7,15 @@ const CardDetails = ({ person }) => {
     const [filteredImages, setFilteredImages] = useState(person.images);
 
     const handleTabClick = (index) => {
-        // Filter images based on the clicked category
         if (index === 0) {
             // All
             setFilteredImages(person.images);
         } else if (index === 1) {
             // Photos
-            setFilteredImages(person.images.filter(img => img.type === 'photo')); // Assuming 'type' is a property indicating photo
+            setFilteredImages(person.images.filter(img => img.type === 'photo'));
         } else if (index === 2) {
             // Videos
-            setFilteredImages(person.images.filter(img => img.type === 'video')); // Assuming 'type' is a property indicating video
+            setFilteredImages(person.images.filter(img => img.type === 'video'));
         }
     };
 
@@ -49,7 +48,7 @@ const CardDetails = ({ person }) => {
             <div className="flex items-center justify-center">
                 <CardNav 
                     arr={["All", "Photos", "Videos"]}
-                    handler={(index) => handleTabClick(index)} // Pass the handler to filter images
+                    handler={(index) => handleTabClick(index)}
                 />
             </div>
             <div className="rounded-t-[56px] border-8 border-b-0 border-white overflow-hidden">

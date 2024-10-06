@@ -23,6 +23,7 @@ export const initialPerson = {
     location: 'LG, Nigeria',
     cardFront: Card1Front,
     cardBack: Card1Back,
+    niche: 'Technology',
     qrcodeClass: "absolute bottom-5 right-10",
     logo: "https://res.cloudinary.com/dafdhu3h5/image/upload/v1727474173/clurakhvmq2gyyafnndu.png",
     images: [

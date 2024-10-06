@@ -27,7 +27,14 @@
 
 .remove-scroll-bar::-webkit-scrollbar {
     height: 0;
-    /* background: #000; */
+}
+.remove-scroll-bar-width::-webkit-scrollbar {
+    width: 4px;
+    background-color: white;
+}
+
+.remove-scroll-bar-width::-webkit-scrollbar-thumb {
+    background: skyblue;
 }
 
 .signal-image {
