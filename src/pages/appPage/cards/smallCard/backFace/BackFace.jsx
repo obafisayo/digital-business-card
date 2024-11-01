@@ -7,20 +7,21 @@ import { PiShareFat } from "react-icons/pi";
 import Share from "../share/Share";
 import Mediadisplay from "../../../../../components/mediadisplay/Mediadisplay";
 
-const isValidColor = (color) => {
-  const option = new Option().style;
-  option.color = color;
-  return option.color !== "";
-};
-
-const isValidGradient = (gradient) => {
-  return /^linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/.test(
-    gradient
-  );
-};
 
 const BackFace = ({ person, removeFlip }) => {
   const [shareClicked, setShareClicked] = useState(false);
+  
+  const isValidColor = (color) => {
+    const option = new Option().style;
+    option.color = color;
+    return option.color !== "";
+  };
+  
+  const isValidGradient = (gradient) => {
+    return /^linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/.test(
+      gradient
+    );
+  };
 
   const handleCancel = () => {
     setShareClicked(false);

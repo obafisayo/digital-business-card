@@ -1,19 +1,25 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import QRcodeComponent from '../../../../../components/qrcode/QRcodeComponent';
 
-const isValidColor = (color) => {
-    const option = new Option().style;
-    option.color = color;
-    return option.color !== '';
-};
-
-const isValidGradient = (gradient) => {
-    return /^linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/.test(gradient);
-};
 
 const InitialFront = ({ person, html, removeFlip }) => {
     const frontRef = useRef(null);
-
+    const [qrlink, setQrlink] = useState("http://localhost:3000/app/cards")
+    
+    const isValidColor = (color) => {
+        const option = new Option().style;
+        option.color = color;
+        return option.color !== '';
+    };
+    
+    const isValidGradient = (gradient) => {
+        return /^linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/.test(gradient);
+    };
+    useEffect(() => {
+        if (person.link) {
+            setQrlink(person.link)
+        }
+    }, [person])
     useEffect(() => {
         if (frontRef.current) {
             frontRef.current.innerHTML = html;
@@ -39,9 +45,9 @@ const InitialFront = ({ person, html, removeFlip }) => {
             }}
         >
             <div ref={frontRef}></div>
-            <div className={person.qrcodeClass}>
-                <QRcodeComponent link={person.link} size={50} />
-            </div>
+            {person.qrcodeClass && <div className={person.qrcodeClass}>
+                <QRcodeComponent link={qrlink} size={50} />
+            </div>}
         </div>
     );
 };

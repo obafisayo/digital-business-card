@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-// Create Context
 const BasicContext = createContext();
 
-// Create Provider Component
 export const BasicProvider = ({ children }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -45,7 +43,7 @@ export const BasicProvider = ({ children }) => {
                 resourceType: 'image',
             },
             (error, result) => {
-                setLoading(false); // Stop imageloading
+                setLoading(false);
 
                 if (error) {
                     console.error("Error during upload:", error);
@@ -54,7 +52,7 @@ export const BasicProvider = ({ children }) => {
                 if (result.event === 'success') {
                     const secureUrl = result.info.secure_url;
                     setIsChanged(true);
-                    callback(secureUrl); // Pass the URL to the callback
+                    callback(secureUrl);
                 }
             }
         );

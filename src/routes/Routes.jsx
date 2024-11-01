@@ -30,6 +30,8 @@ import People from "../pages/appPage/people/People.jsx";
 import Account from "../pages/appPage/account/Account.jsx";
 import ProtectedRoute from "./ProtectedRoute";
 import { UserProvider } from "../contexts/UserContext.js";
+import { CardProvider } from "../contexts/cardContext.js";
+import { TemplateProvider } from "../contexts/TemplateContext.js";
 
 export default function Router() {
     return useRoutes([
@@ -53,7 +55,14 @@ export default function Router() {
         },
         {
             path: APP,
-            element: <UserProvider><AppLayout /></UserProvider>,
+            element: 
+                <UserProvider>
+                    <CardProvider>
+                        <TemplateProvider>
+                            <AppLayout />
+                        </TemplateProvider>
+                    </CardProvider>
+                </UserProvider>,
             children: [
                 {
                     path: APP,

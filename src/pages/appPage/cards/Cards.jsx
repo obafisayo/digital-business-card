@@ -1,72 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import EditCard from './editCard/EditCard';
-import axios from 'axios';
-import { URL } from '../../../routes/RoutesConstant';
 import MultiStepForm from '../../../components/MultiStepForm/MultiStepForm';
 import LoadingDiv from '../../../components/loadingDiv/LoadingDiv';
 import SmallCard from './smallCard/SmallCard';
 import { initialPerson } from '../../../config/userConfig';
 import { useBasicContext } from '../../../contexts/BasicContext';
 import CardDetails from './cardDetails/CardDetails';
+import { useCardContext } from '../../../contexts/cardContext';
+import { useTemplateContext } from '../../../contexts/TemplateContext';
 
 const Cards = () => {
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const { isEditing, setIsEditing, isTablet } = useBasicContext();
+    const { cardData } = useCardContext();
+    const { templates, isLoading } = useTemplateContext();
 
     const openPopup = () => setIsPopupVisible(true);
     const closePopup = () => setIsPopupVisible(false);
 
     const [person, setPerson] = useState(initialPerson);
-    const [cards, setCards] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const url = URL;
+    const [card, setCard] = useState(null);
 
     useEffect(() => {
-        const fetchCardTemplate = async () => {
-            setIsLoading(true);
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.post(`${url}/card/template/${person.templateId || 1}`, person, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setCards([response.data]);
-            } catch (error) {
-                console.error('Error fetching cards:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+        if (cardData) {
+            setPerson(prevPerson => ({
+                ...prevPerson,
+                ...cardData
+            }));
+        }
 
-        fetchCardTemplate();
-    }, [person, url]);
-
-    
+        if (templates.length > 0 && cardData?.template_id) {
+            setCard(templates[cardData.template_id - 1]);
+        }
+    }, [cardData, templates]);
 
     return (
-        <div className={`relative flex ${isEditing? "sm:pt-10" : "sm:pt-20"} max-sm:pt-10 max-sm:pb-0 items-center w-full h-fit`}>
+        <div className={`relative flex ${isEditing ? "sm:pt-10" : "sm:pt-20"} max-sm:pt-10 max-sm:pb-0 items-center w-full h-fit`}>
             <div className="md:container h-full flex max-lg:flex-col md:gap-8 max-lg:gap-14 max-lg:justify-center justify-evenly w-full max-lg:items-center items-start">
                 <div className='sticky top-0 md:top-10'>
                     {isEditing ? (
-                        <SmallCard person={person} html={cards[0]} removeFlip={!isTablet} />
+                        <SmallCard person={person} html={card} removeFlip={!isTablet} />
                     ) : (
                         isLoading ? (
                             <LoadingDiv />
                         ) : (
-                            <SmallCard person={person} html={cards[0]} />
+                            <SmallCard person={person} html={card} />
                         )
                     )}
                 </div>
-                {isEditing ?
+                {isEditing ? (
                     <EditCard 
                         setPerson={setPerson}
                         person={person}
                         setIsEditing={setIsEditing}
                     />
-                    : 
+                ) : (
                     <CardDetails person={person} />
-                }
+                )}
             </div>
             <div>
                 <button
