@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import Imgf1 from "../../../../../assets/cards/card1/Front.png";
-import Imgb1 from "../../../../../assets/cards/card1/Back.png";
-import Imgf2 from "../../../../../assets/cards/card2/Front.png";
-import Imgb2 from "../../../../../assets/cards/card2/Back.png";
 import { Button, ColorPicker } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useBasicContext } from '../../../../../contexts/BasicContext';
 import LoadingDiv from '../../../../../components/loadingDiv/LoadingDiv';
-
-const designImg = [
-  { name: "classic", imgf: Imgf1, imgb: Imgb1 },
-  { name: "special", imgf: Imgf2, imgb: Imgb2 },
-];
+import { cardBackground } from '../../../../../config/cardConfig';
 
 const DEFAULT_COLOR = [
   { color: 'rgb(16, 142, 233)', percent: 0 },
   { color: 'rgb(135, 208, 104)', percent: 100 },
 ];
 
-const Display = ({ person, setPerson }) => {
-  const [selectedDesign, setSelectedDesign] = useState(designImg[0]);
+const Display = ({ person, setPerson, setCard, templates }) => {
+  const [selectedDesign, setSelectedDesign] = useState(cardBackground[person.template_id - 1]);
   const { imageloading, handleImageUpload } = useBasicContext();
   const [selectedColor, setSelectedColor] = useState(DEFAULT_COLOR);
   const [logo, setLogo] = useState(person.logo);
   const [personsChanged, setPersonsChanged] = useState(false);
+  // const [currentIndex, setCurrentIndex] = useState(person.template_id)
 
-  const handleDesignChange = (design) => {
+  const handleDesignChange = (design, index) => {
     setSelectedDesign(design);
     setSelectedColor("");
     setPersonsChanged(true);
+    setCard(templates[index])
   };
 
   const handleColorChange = (color) => {
@@ -49,8 +43,8 @@ const Display = ({ person, setPerson }) => {
     if (personsChanged) {
       setPerson((prev) => ({
         ...prev,
-        cardFront: selectedColor.color || selectedColor ? selectedColor.color || selectedColor : selectedDesign.imgf,
-        cardBack: selectedColor.color || selectedColor ? selectedColor.color || selectedColor : selectedDesign.imgb,
+        cardFront: selectedColor.color || selectedColor ? selectedColor.color || selectedColor : selectedDesign.cardFront,
+        cardBack: selectedColor.color || selectedColor ? selectedColor.color || selectedColor : selectedDesign.cardBack,
         logo: logo,
       }));
       setPersonsChanged(false);
@@ -62,18 +56,18 @@ const Display = ({ person, setPerson }) => {
       <div>
         <h1 className="text-xl font-semibold mb-2">Design</h1>
         <div className="flex gap-4">
-          {designImg.map((item, index) => (
+          {cardBackground.map((item, index) => (
             <div
               key={index}
               className={`transition-all duration-200 ease-in-out group border-2 rounded-lg hover:border-2 p-1 hover:border-textPrimary ${selectedDesign.name === item.name ? 'border-textPrimary' : ''}`}
-              onClick={() => handleDesignChange(item)}
+              onClick={() => handleDesignChange(item, index)}
             >
               <div className="flex flex-col gap-2 border-2 p-1 signal-image rounded-md">
                 <div className="w-20">
-                  <img src={item.imgf} alt={`${item.name}-front`} className="w-full h-full" />
+                  <img src={item.cardFront} alt={`${item.name}-front`} className="w-full h-full" />
                 </div>
                 <div className="w-20">
-                  <img src={item.imgb} alt={`${item.name}-back`} className="w-full h-full" />
+                  <img src={item.cardBack} alt={`${item.name}-back`} className="w-full h-full" />
                 </div>
               </div>
               <h1 className='font-semibold text-brandGray'>{item.name}</h1>

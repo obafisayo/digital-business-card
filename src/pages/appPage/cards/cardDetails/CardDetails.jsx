@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Collage from '../../../../components/collage/Collage';
 import UserProfileImage from '../../account/profileImg/UserProfileImage';
 import CardNav from '../../../../components/cardNav/CardNav';
 
 const CardDetails = ({ person }) => {
-    const [filteredImages, setFilteredImages] = useState(person.images);
+    const [filteredImages, setFilteredImages] = useState([]);
 
     const handleTabClick = (index) => {
+        if (!person || !person.images) {
+            setFilteredImages([]);
+            return;
+        }
+
+        let newFilteredImages = [];
         if (index === 0) {
             // All
-            setFilteredImages(person.images);
+            newFilteredImages = person.images;
         } else if (index === 1) {
             // Photos
-            setFilteredImages(person.images.filter(img => img.type === 'photo'));
+            newFilteredImages = person.images.filter(img => img.type === 'photo');
         } else if (index === 2) {
             // Videos
-            setFilteredImages(person.images.filter(img => img.type === 'video'));
+            newFilteredImages = person.images.filter(img => img.type === 'video');
         }
+
+        setFilteredImages(newFilteredImages);
     };
+
+    useEffect(() => {
+        if (person && person.images) {
+            setFilteredImages(person.images);
+        } else {
+            setFilteredImages([]);
+        }
+    }, [person]);
 
     return (
         <div className="flex flex-col gap-4 relative w-full h-fit max-sm:pb-10 rounded-t-[46px] bg-brandSky">
@@ -35,7 +51,7 @@ const CardDetails = ({ person }) => {
                 </div>
             </div>
             <div className="w-full mt-10 flex justify-center items-center">
-                <p className="text-sm text-center w-9/12 text-textPrimary">{person.bio}</p>
+                <p className="text-sm text-center w-9/12 text-textPrimary">{person?.bio || 'No bio available'}</p>
             </div>
             <div className="flex justify-center items-center gap-6">
                 <button className="bg-primary text-white rounded-full px-9 py-3 shadow-lg hover:shadow-inner">
@@ -52,10 +68,16 @@ const CardDetails = ({ person }) => {
                 />
             </div>
             <div className="rounded-t-[56px] border-8 border-b-0 border-white overflow-hidden">
-                <Collage images={filteredImages} />
+                {filteredImages.length > 0 ? (
+                    <Collage images={filteredImages} />
+                ) : (
+                    <div className="flex items-center justify-center w-full h-full">
+                        <h1>No available images</h1>
+                    </div>
+                )}
             </div> 
         </div>
-    )
-}
+    );
+};
 
 export default CardDetails;

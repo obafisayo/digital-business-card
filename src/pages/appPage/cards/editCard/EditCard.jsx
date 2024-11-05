@@ -4,7 +4,7 @@ import Information from './information/Information';
 import Display from './display/Display';
 import Fields from './fields/Fields';
 
-const EditCard = ({ person, setPerson, setIsEditing }) => {
+const EditCard = ({ person, setPerson, setIsEditing, setCard, templates }) => {
     const [activeTab, setActiveTab] = useState(0);
 
     const handleTabClick = (index) => {
@@ -36,7 +36,7 @@ const EditCard = ({ person, setPerson, setIsEditing }) => {
                 </div>
             </div>
             <div className="flex flex-col gap-2 relative max-sm:pb-14 p-8 pt-0">
-                {activeTab === 0 && <Display person={person} setPerson={setPerson} />}
+                {activeTab === 0 && <Display person={person} setPerson={setPerson} setCard={setCard} templates={templates} />}
                 {activeTab === 1 && <Information person={person} setPerson={setPerson} />}
                 {activeTab === 2 && <Fields person={person} setPerson={setPerson} />}
             </div>

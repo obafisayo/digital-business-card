@@ -87,7 +87,7 @@ const Mediadisplay = ({ arr, big, handler = () => {} }) => {
       ) : !big ? (
         <div className="w-full">
           <h1 className="p-2 font-medium">What we Offer</h1>
-          <div
+          {arr.length > 0 ? <div
             ref={containerRef}
             className="scroll-smooth w-full overflow-x-auto remove-scroll-bar flex space-x-2"
           >
@@ -118,10 +118,14 @@ const Mediadisplay = ({ arr, big, handler = () => {} }) => {
               icon={<FaCaretRight />}
               top={"top-[59%]"}
             />
+          </div> : 
+          <div className="flex items-center justify-center w-full h-full">
+            <h1>No available Image</h1>
           </div>
+          }
         </div>
       ) : (
-        <div className="grid gap-1 grid-cols-2 md:grid-cols-3">
+        arr.length > 0 ? <div className="grid gap-1 grid-cols-2 md:grid-cols-3">
           {arr.map((image, index) => (
             <div
               key={index}
@@ -135,6 +139,9 @@ const Mediadisplay = ({ arr, big, handler = () => {} }) => {
               />
             </div>
           ))}
+        </div> : 
+        <div className="flex items-center justify-center w-full h-full">
+          <h1>No available Media</h1>
         </div>
       )}
     </div>

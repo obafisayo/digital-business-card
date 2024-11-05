@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { fetchUserCardData } from "../api/cardApi";
-import { cardImages } from "../config/cardConfig";
+import { cardBackground } from "../config/cardConfig";
+import { fetchCardImageData } from "../api/imageApi";
 
 const CardContext = createContext();
 
@@ -15,11 +16,23 @@ export const CardProvider = ({ children }) => {
             try {
                 const token = localStorage.getItem('token');
                 const data = await fetchUserCardData(token);
+                let imageData = [];
 
-                const imageData = cardImages[data.template_id - 1] || {};
+                try {
+                    const fetchedImageData = await fetchCardImageData(token, data.id);
+                    if (Array.isArray(fetchedImageData) && fetchedImageData.length > 0) {
+                        imageData = fetchedImageData;
+                    }
+                } catch (error) {
+                    console.error("Error fetching image data", error);
+                }
+
+                const backgroundImageData = cardBackground[data.template_id - 1] || {};
+
                 setCardData({
                     ...data,
-                    ...imageData
+                    ...backgroundImageData,
+                    images: imageData
                 });
             } catch (error) {
                 console.error("Error fetching user's card data", error);

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 const CardNav = ({ arr, handler = () => {} }) => {
-    const [clicked, setClicked] = useState([true, false, false]); // Initialize with the first tab clicked
+    const [clicked, setClicked] = useState([true, false, false]);
 
     const handleClick = (index) => {
         setClicked((prevStates) => 
             prevStates.map((state, idx) => idx === index ? true : false)
         );
-        handler(index); // Pass the index to the handler
+        handler(index);
     };
 
     return (

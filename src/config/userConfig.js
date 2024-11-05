@@ -1,23 +1,3 @@
-export const initialPerson = {
-    images: [
-        "idyfyg0uog5yhi8xamyr",
-        "m83bazamitfm9hvrkbem",
-        "l5mmi1atyze57eejersj",
-        "c8ssxp7ozfwgxywrka6f",
-        "oidgqkss5lwmu5psbctt",
-        "grant-whitty-vkr8QBzCIdc-unsplash_j0wlxn",
-        "Screenshot_2024-06-20_164858_jwxwdw",
-    ],
-    socials: {
-        facebook: "https://facebook.com/",
-        instagram: "https://instagram.com/",
-        linkedin: "https://linkedin.com/",
-        website: "https://website.com/",
-        twitter: "https://x.com/",
-        whatsapp: "https://web.whatsapp.com/",
-    },
-};
-
 // export const initialPerson = {
 //     templateId: "1",
 //     firstname: 'Obafisayo',
@@ -37,7 +17,7 @@ export const initialPerson = {
 //     niche: 'Technology',
     
 //     link: 'https://obafisayo-portfolio.netlify.app/',
-//     cardFront: Card1Front,
+//     cardFront: Card1Front
 //     cardBack: Card1Back,
 //     qrcodeClass: "absolute bottom-5 right-10",
 //     logo: "https://res.cloudinary.com/dafdhu3h5/image/upload/v1727474173/clurakhvmq2gyyafnndu.png",

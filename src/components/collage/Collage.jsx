@@ -6,6 +6,7 @@ const Collage = ({ images }) => {
   const cloudinaryBase = "https://res.cloudinary.com/dafdhu3h5/image/upload";
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [imgArr, setImgArr] = useState([]);
 
   const imagesPerPage = 6;
 
@@ -28,7 +29,7 @@ const Collage = ({ images }) => {
     };
 
     imageElements.forEach((img, index) => {
-      img.src = `${cloudinaryBase}/${currentImages[index]}?w=500&h=500&fit=crop&auto=webp`;
+      img.src = `${cloudinaryBase}/${currentImages[index].name}?w=500&h=500&fit=crop&auto=webp`;
       img.onload = checkAllImagesLoaded;
       img.onerror = checkAllImagesLoaded;
     });
@@ -48,9 +49,13 @@ const Collage = ({ images }) => {
     }
   };
 
+  useEffect(() => {
+      const namesArray = currentImages?.map(item => item.name) || [];
+      setImgArr(namesArray);
+  }, [currentImages]);
   return (
     <div className="">
-      {loading ? <Loading /> : <Mediadisplay arr={currentImages} big />}
+      {loading ? <Loading /> : <Mediadisplay arr={imgArr} big />}
       {!loading && (
         <>
           <div className="flex justify-between mt-4">

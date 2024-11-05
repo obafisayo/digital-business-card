@@ -1,10 +1,12 @@
-import React from 'react'
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link } from "react-router-dom";
 import { BsGlobe } from 'react-icons/bs';
 import { FaLinkedinIn } from 'react-icons/fa';
 import { FaFacebookF, FaXTwitter } from 'react-icons/fa6';
 
-const CardLinks = ({socials}) => {
+const CardLinks = ({ socials }) => {
+  if (!socials) return null;
+
   return (
     <div className='flex gap-1 z-10'>
         {socials.website && <Link to={socials.website} target="_blank" rel="noopener noreferrer">
@@ -28,8 +30,7 @@ const CardLinks = ({socials}) => {
             </div>
         </Link>}
     </div>
-    
-  )
+  );
 }
 
 export default CardLinks;

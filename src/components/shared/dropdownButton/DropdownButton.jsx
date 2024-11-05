@@ -20,11 +20,11 @@ const items = [
 // Define the DropdownButton component
 const DropdownButton = () => {
   const { isEditing, setIsEditing } = useBasicContext();
-  const [selectedValue, setSelectedValue] = useState(isEditing ? 'Edit Card' : 'Card Details');
+  const [selectedValue, setSelectedValue] = useState(isEditing ? 'Card Details' : 'Edit Card');
 
   // Effect to update selectedValue based on isEditing
   useEffect(() => {
-    setSelectedValue(isEditing ? 'Edit Card' : 'Card Details');
+    setSelectedValue(isEditing ? 'Card Details' : 'Edit Card');
   }, [isEditing]);
 
   // Function to handle the menu item click
@@ -44,9 +44,9 @@ const DropdownButton = () => {
       if (typeof labelText === 'string') {
         // Determine action based on the selected item
         if (key === '0') {
-          setIsEditing(false); // Clicked on "Card Details"
+          setIsEditing(false); // Clicked on "Edit Card"
         } else if (key === '1') {
-          setIsEditing(true); // Clicked on "Edit Card"
+          setIsEditing(true); // Clicked on "Card Details"
         }
       }
     }
