@@ -3,7 +3,7 @@ import { HiOutlineIdentification } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { APP, CONTACTS, SIGNUP, URL } from '../../../routes/RoutesConstant';
-import { HiEye, HiEyeOff } from 'react-icons/hi'; // Import eye icons
+import { HiEye, HiEyeOff } from 'react-icons/hi';
 
 const Signin = () => {
   const [loginData, setLoginData] = useState({
@@ -11,7 +11,7 @@ const Signin = () => {
     password: ''
   });
   const [errorMessage, setErrorMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const url = URL;
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Signin = () => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(''); // Reset error message before login attempt
+    setErrorMessage('');
 
     try {
       const response = await axios.post(`${url}/user/login`, loginData);
@@ -30,7 +30,7 @@ const Signin = () => {
       if (response.status === 200) {
         const { accessToken } = response.data;
 
-        if (accessToken) { // Ensure accessToken is defined
+        if (accessToken) {
           localStorage.setItem('token', accessToken);
           localStorage.setItem('tokenExpiration', Date.now() + 10000000 * 1000);
           navigate(APP);
@@ -79,7 +79,7 @@ const Signin = () => {
           <label className='font-semibold' htmlFor='password'>Password</label>
           <div className='relative'>
             <input 
-              type={showPassword ? "text" : "password"} // Toggle input type
+              type={showPassword ? "text" : "password"}
               name="password" 
               id="password"
               onChange={handleLoginChange}
@@ -88,7 +88,7 @@ const Signin = () => {
             />
             <span 
               className='absolute right-12 top-1/2 transform -translate-y-1/2 cursor-pointer' 
-              onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+              onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <HiEyeOff size={24} /> : <HiEye size={24} />} {/* Eye icon */}
             </span>

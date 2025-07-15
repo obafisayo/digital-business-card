@@ -106,7 +106,7 @@ const Sidebar = ({ children }) => {
                         }
                     </div>
                 </div>
-                <div className="w-full h-full overflow-y-auto bg-brandSky hero-image">
+                <div className="w-full h-full overflow-y-auto">
                     {children}
                 </div>
             </div>

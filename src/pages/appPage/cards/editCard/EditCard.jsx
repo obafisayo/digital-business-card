@@ -37,7 +37,7 @@ const EditCard = ({ person, setPerson, setIsEditing, setCard, templates }) => {
             </div>
             <div className="flex flex-col gap-2 relative max-sm:pb-14 p-8 pt-0">
                 {activeTab === 0 && <Display person={person} setPerson={setPerson} setCard={setCard} templates={templates} />}
-                {activeTab === 1 && <Information person={person} setPerson={setPerson} />}
+                {activeTab === 1 && <Information person={person} setPerson={setPerson} templates={templates} />}
                 {activeTab === 2 && <Fields person={person} setPerson={setPerson} />}
             </div>
         </div>

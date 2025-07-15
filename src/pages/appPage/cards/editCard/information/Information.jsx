@@ -15,23 +15,6 @@ const Information = ({ person, setPerson }) => {
         'Fashion',
     ];
 
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    };
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        if (name === 'email' && !validateEmail(value)) {
-            return;
-        }
-        handleEdit(event);
-    };
-
-    const handleEdit = (e) => {
-        setPerson({ ...person, [e.target.name]: e.target.value });
-    };
-
     const handleNicheInputChange = (event) => {
         const value = event.target.value;
         setNicheInput(value);
@@ -42,6 +25,12 @@ const Information = ({ person, setPerson }) => {
         setNicheInput(niche);
         setFilteredNiches([]);
         setPerson({ ...person, niche });
+    };
+    const handleChange = (event) => {
+        const { id, value } = event.target;
+        setPerson({ ...person, [id]: value });
+        let el = document.getElementById(`sudo-${id}`)
+        el.innerText = value;
     };
 
     return (
@@ -61,8 +50,8 @@ const Information = ({ person, setPerson }) => {
                     <input id='title' type="text" name="title" value={person.title} onChange={handleChange} className="border rounded p-1 w-full" />
                 </div>
                 <div>
-                    <label htmlFor='tel' className="block">Telephone</label>
-                    <input id='tel' type="tel" name="telephone" value={person.telephone} onChange={handleChange} className="border rounded p-1 w-full" />
+                    <label htmlFor='telephone' className="block">Telephone</label>
+                    <input id='telephone' type="tel" name="telephone" value={person.telephone} onChange={handleChange} className="border rounded p-1 w-full" />
                 </div>
                 <div>
                     <label htmlFor='email' className="block">Email</label>
@@ -80,8 +69,8 @@ const Information = ({ person, setPerson }) => {
             <h1 className="text-xl font-semibold mb-2">Business</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label htmlFor='company' className="block">Company Name</label>
-                    <input id='company' type="text" name="company_name" value={person.company_name} onChange={handleChange} className="border rounded p-1 w-full" />
+                    <label htmlFor='company_name' className="block">Company Name</label>
+                    <input id='company_name' type="text" name="company_name" value={person.company_name} onChange={handleChange} className="border rounded p-1 w-full" />
                 </div>
                 <div>
                     <label htmlFor='company_tagline' className="block">Company Tagline</label>

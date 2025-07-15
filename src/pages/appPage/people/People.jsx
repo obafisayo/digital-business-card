@@ -1,8 +1,12 @@
 import React from 'react'
+import StoriesCarousel from './stories/Stories';
 
 const People = () => {
   return (
-    <div>People</div>
+    <div>
+      People
+      <StoriesCarousel />
+    </div>
   )
 }
 
